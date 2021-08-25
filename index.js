@@ -1,10 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const userRoutes = require('./routes/user.routs');
 const vehicleRoutes = require('./routes/vehicle.route');
 const app = express();
 
-const uri = 'mongodb://172.17.0.2:27017';
+dotenv.config();
+const uri = `${process.env.MONGO_DB_URI}`;
 try {
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
     console.log('connected'),
