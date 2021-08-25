@@ -47,16 +47,3 @@ exports.signIn = (req, res) => {
     });
   });
 };
-
-// exports.delete = (req, res) => {
-//   User.findByIdAndDelete(req.params.id)
-//     .then((user) => {
-//       if (!user) {
-//         return res.status(400).send({ message: 'user not found' });
-//       }
-//       res.send({ message: 'user deleted successfully' });
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: 'something went wrong' });
-//     });
-// };

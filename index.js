@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const userRoutes = require('./routes/user.routs');
-const vehicleRoutes = require('./routes/vehicle.route');
+const userRoutes = require('./routes/user.routes');
+const vehicleRoutes = require('./routes/vehicle.routes');
+const driverRoutes = require('./routes/driver.routes');
+const deviceRoutes = require('./routes/device.routes');
 const app = express();
 
 dotenv.config();
@@ -18,5 +20,7 @@ try {
 app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/driver', driverRoutes);
+app.use('/api/device', deviceRoutes);
 
 app.listen(4000, () => console.log('listening on 4000'));
