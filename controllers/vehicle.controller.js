@@ -1,11 +1,10 @@
 const Vehicles = require('../models/Vehicles');
 const Device = require('../models/Device');
-const jwt = require('jsonwebtoken');
-const { request } = require('express');
+const Driver = require('../models/Driver');
 
 exports.getVehicles = (req, res) => {
   Vehicles.find()
-    .populate('device')
+    .populate(['driver', 'device'])
     .then((vehicles) => {
       res.send(vehicles);
     })
@@ -18,8 +17,7 @@ exports.addVehicle = (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: 'please fill all details' });
   }
-  console.log(req.body);
-  const device = new Vehicles({
+  const vehicle = new Vehicles({
     license: req.body.license,
     make: req.body.make,
     reading: req.body.reading,
@@ -28,7 +26,7 @@ exports.addVehicle = (req, res) => {
     driver: req.body.driver,
     device: req.body.device,
   });
-  device
+  vehicle
     .save()
     .then((data) => res.send(data))
     .catch((err) => {
@@ -40,7 +38,6 @@ exports.addDevice = (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: 'please fill all details' });
   }
-  console.log(req.body);
   const device = new Device({
     imei: req.body.imei,
     lat: req.body.lat,
@@ -59,14 +56,14 @@ exports.addDriver = (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: 'please fill all details' });
   }
-  const device = new Device({
+  const driver = new Driver({
     device_history_id: req.body.device_history_id,
     driver_id: req.body.driver_id,
     driver_name: req.body.driver_name,
     released: req.body.released,
     vehicle_history_id: req.body.vehicle_history_id,
   });
-  device
+  driver
     .save()
     .then((data) => res.send(data))
     .catch((err) => {
