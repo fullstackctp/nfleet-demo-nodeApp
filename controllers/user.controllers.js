@@ -48,30 +48,6 @@ exports.signIn = (req, res) => {
   });
 };
 
-// exports.update = (req, res) => {
-//   if (!req.body) {
-//     return res.status(400).send({ message: 'please fill all details' });
-//   }
-//   User.findByIdAndUpdate(
-//     req.params.id,
-//     {
-//       first_name: req.body.first_name,
-//       last_name: req.body.last_name,
-//       email: req.body.email,
-//     },
-//     { new: true },
-//   )
-//     .then((user) => {
-//       if (!user) {
-//         return res.status(400).send({ message: 'user not found' });
-//       }
-//       res.send(user);
-//     })
-//     .catch((err) => {
-//       res.status(500).send({ message: 'something went wrong' });
-//     });
-// };
-
 // exports.delete = (req, res) => {
 //   User.findByIdAndDelete(req.params.id)
 //     .then((user) => {

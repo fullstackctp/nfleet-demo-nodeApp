@@ -9,6 +9,9 @@ const vehicleSchema = new Schema(
     reading: Array,
     vin: String,
     id: String,
+    incl_no: String,
+    highest_Speed: Number,
+    last_mileage: Number,
     driver: {
       type: Schema.Types.ObjectId,
       ref: 'Driver',
