@@ -1,13 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const userRoutes = require('./routes/user.routes');
 const vehicleRoutes = require('./routes/vehicle.routes');
 const driverRoutes = require('./routes/driver.routes');
 const deviceRoutes = require('./routes/device.routes');
 const app = express();
 
-dotenv.config();
 const uri = `${process.env.MONGO_DB_URI}`;
 try {
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
