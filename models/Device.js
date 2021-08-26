@@ -23,7 +23,7 @@ const deviceSchema = new Schema(
     fuel_consumption: Number,
     fuel_percent: Number,
     heading: Number,
-    id: String,
+    _id: String,
     locating: Boolean,
     msisdn: String,
     onn: Boolean,

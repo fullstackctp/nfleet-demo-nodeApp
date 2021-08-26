@@ -21,7 +21,7 @@ exports.addDevice = (req, res) => {
     fuel_consumption: req.body.fuel_consumption,
     fuel_percent: req.body.fuel_percent,
     heading: req.body.heading,
-    id: req.body.id,
+    _id: req.body.id,
     locating: req.body.locating,
     msisdn: req.body.msisdn,
     on: req.body.on,

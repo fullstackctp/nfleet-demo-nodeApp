@@ -9,7 +9,7 @@ const vehicleSchema = new Schema(
     model: String,
     reading: Array,
     vin: String,
-    id: String,
+    _id: String,
     incl_no: String,
     highest_Speed: Number,
     last_mileage: Number,
@@ -20,6 +20,14 @@ const vehicleSchema = new Schema(
     device: {
       type: Schema.Types.ObjectId,
       ref: 'Device',
+    },
+    created_by: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    updated_by: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
   },
   { timestamps: true },

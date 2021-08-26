@@ -41,7 +41,10 @@ const phoneSchema = new Schema({
 const driverSchema = new Schema(
   {
     device_history_id: String,
-    driver_id: String,
+    _id: {
+      type: String,
+      alias: 'driver_id',
+    },
     released: Boolean,
     vehicle_history_id: String,
     first_name: String,

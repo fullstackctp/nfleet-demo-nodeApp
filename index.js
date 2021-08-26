@@ -9,8 +9,10 @@ const app = express();
 
 const uri = `${process.env.MONGO_DB_URI}`;
 try {
-  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
-    console.log('connected'),
+  mongoose.connect(
+    uri,
+    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
+    () => console.log('connected'),
   );
 } catch (err) {
   console.log('could not connect');

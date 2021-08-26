@@ -26,12 +26,14 @@ exports.addVehicle = (req, res) => {
     model: req.body.model,
     reading: req.body.reading,
     vin: req.body.vin,
-    id: req.body.id,
+    _id: req.body.id,
     driver: req.body.driver,
     device: req.body.device,
     incl_no: req.body.incl_no,
     highest_speed: req.body.highest_speed,
     last_mileage: req.body.last_mileage,
+    created_by: req.userId,
+    updated_by: req.userId,
   });
   vehicle
     .save()
@@ -51,6 +53,7 @@ exports.updateVehicle = (req, res) => {
       incl_no: req.body.incl_no,
       model: req.body.model,
       last_mileage: req.body.last_mileage,
+      updated_by: req.userId,
     },
     { new: true },
   )
