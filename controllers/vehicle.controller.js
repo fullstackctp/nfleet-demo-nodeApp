@@ -1,10 +1,13 @@
 const Vehicles = require('../models/Vehicles');
-const Device = require('../models/Device');
-const Driver = require('../models/Driver');
+const pagination = require('../utility/pagination');
 
 exports.getVehicles = (req, res) => {
-  Vehicles.find()
-    .populate(['driver', 'device'])
+  const { page, size } = req.query;
+  const { limit, offset } = pagination.getPagination(page, size);
+  Vehicles.paginate(
+    {},
+    { offset, limit, customLabels: pagination.myCustomLabels, populate: ['driver', 'device'] },
+  )
     .then((vehicles) => {
       res.send(vehicles);
     })

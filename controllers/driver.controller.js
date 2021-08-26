@@ -1,4 +1,5 @@
 const Driver = require('../models/Driver');
+const pagination = require('../utility/pagination');
 
 exports.addDriver = (req, res) => {
   if (!req.body) {
@@ -28,7 +29,9 @@ exports.addDriver = (req, res) => {
 };
 
 exports.getDrivers = (req, res) => {
-  Driver.find()
+  const { page, size } = req.query;
+  const { limit, offset } = pagination.getPagination(page, size);
+  Driver.paginate({}, { offset, limit, customLabels: pagination.myCustomLabels })
     .then((data) => res.send(data))
     .catch((err) => {
       res.status(500).send({ message: 'something went wrong' });

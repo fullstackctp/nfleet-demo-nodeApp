@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 
 const deviceSchema = new Schema(
@@ -12,7 +13,11 @@ const deviceSchema = new Schema(
     alt: Number,
     checked_in: Boolean,
     coolant_temp: Number,
-    driver_id: String,
+    driver_id: {
+      type: Schema.Types.ObjectId,
+      ref: 'Driver',
+    },
+    // driver_id: String,
     e_type: Number,
     firmware: String,
     fuel_consumption: Number,
@@ -39,5 +44,7 @@ const deviceSchema = new Schema(
   },
   { timestamps: true },
 );
+
+deviceSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Device', deviceSchema);

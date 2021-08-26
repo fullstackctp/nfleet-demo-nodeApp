@@ -1,4 +1,5 @@
 const Device = require('../models/Device');
+const pagination = require('../utility/pagination');
 
 exports.addDevice = (req, res) => {
   if (!req.body) {
@@ -44,7 +45,9 @@ exports.addDevice = (req, res) => {
 };
 
 exports.getDevices = (req, res) => {
-  Device.find()
+  const { page, size } = req.query;
+  const { limit, offset } = pagination.getPagination(page, size);
+  Device.paginate({}, { offset, limit, customLabels: pagination.myCustomLabels })
     .then((data) => res.send(data))
     .catch((err) => {
       res.status(500).send({ message: 'something went wrong' });

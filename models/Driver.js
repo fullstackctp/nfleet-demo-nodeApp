@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 
 const addressSchema = new Schema({
@@ -59,5 +60,6 @@ const driverSchema = new Schema(
 driverSchema.virtual('fullName').get(function () {
   return this.name.first + ' ' + this.name.last;
 });
+driverSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('Driver', driverSchema);
