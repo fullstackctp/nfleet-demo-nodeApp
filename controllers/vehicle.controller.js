@@ -1,3 +1,5 @@
+const Device = require('../models/Device');
+const Driver = require('../models/Driver');
 const Vehicles = require('../models/Vehicles');
 const pagination = require('../utility/pagination');
 
@@ -72,10 +74,38 @@ exports.assignDriver = (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: 'please fill all details' });
   }
+  Driver.findById(req.body.driver)
+    .then((data) => {
+      if (!data) {
+        return res.status(400).send({ message: 'driver does not exists' });
+      }
+      Vehicles.findByIdAndUpdate(
+        req.params.id,
+        {
+          driver: req.body.driver,
+        },
+        { new: true },
+      )
+        .then((data) => {
+          if (!data) {
+            return res.status(400).send({ message: 'vehicle not found' });
+          }
+          res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({ message: `something went wrong ${err}` });
+        });
+    })
+    .catch((err) => {
+      res.status(500).send({ message: `something went wrong ${err}` });
+    });
+};
+
+exports.releaseDriver = (req, res) => {
   Vehicles.findByIdAndUpdate(
     req.params.id,
     {
-      driver: req.body.driver,
+      driver: '',
     },
     { new: true },
   )
@@ -90,11 +120,42 @@ exports.assignDriver = (req, res) => {
     });
 };
 
-exports.releaseDriver = (req, res) => {
+exports.assignDevice = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({ message: 'please fill all details' });
+  }
+  Device.findById(req.body.device)
+    .then((data) => {
+      if (!data) {
+        return res.status(400).send({ message: 'device does not exists' });
+      }
+      Vehicles.findByIdAndUpdate(
+        req.params.id,
+        {
+          device: req.body.device,
+        },
+        { new: true },
+      )
+        .then((data) => {
+          if (!data) {
+            return res.status(400).send({ message: 'vehicle not found' });
+          }
+          res.send(data);
+        })
+        .catch((err) => {
+          res.status(500).send({ message: `something went wrong ${err}` });
+        });
+    })
+    .catch((err) => {
+      res.status(500).send({ message: `something went wrong ${err}` });
+    });
+};
+
+exports.releaseDevice = (req, res) => {
   Vehicles.findByIdAndUpdate(
     req.params.id,
     {
-      driver: '',
+      device: '',
     },
     { new: true },
   )

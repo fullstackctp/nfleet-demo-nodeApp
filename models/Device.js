@@ -14,7 +14,7 @@ const deviceSchema = new Schema(
     checked_in: Boolean,
     coolant_temp: Number,
     driver_id: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.String,
       ref: 'Driver',
     },
     // driver_id: String,
