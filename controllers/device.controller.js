@@ -40,7 +40,7 @@ exports.addDevice = (req, res) => {
     .save()
     .then((data) => res.send(data))
     .catch((err) => {
-      res.status(500).send({ message: 'something went wrong' });
+      res.status(500).send({ message: `something went wrong ${err}` });
     });
 };
 
@@ -50,6 +50,6 @@ exports.getDevices = (req, res) => {
   Device.paginate({}, { offset, limit, customLabels: pagination.myCustomLabels })
     .then((data) => res.send(data))
     .catch((err) => {
-      res.status(500).send({ message: 'something went wrong' });
+      res.status(500).send({ message: `something went wrong ${err}` });
     });
 };

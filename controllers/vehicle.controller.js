@@ -89,3 +89,22 @@ exports.assignDriver = (req, res) => {
       res.status(500).send({ message: `something went wrong ${err}` });
     });
 };
+
+exports.releaseDriver = (req, res) => {
+  Vehicles.findByIdAndUpdate(
+    req.params.id,
+    {
+      driver: '',
+    },
+    { new: true },
+  )
+    .then((data) => {
+      if (!data) {
+        return res.status(400).send({ message: 'vehicle not found' });
+      }
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: `something went wrong ${err}` });
+    });
+};
