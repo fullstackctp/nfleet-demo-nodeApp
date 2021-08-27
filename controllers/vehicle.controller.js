@@ -12,7 +12,7 @@ exports.getVehicles = (req, res) => {
       res.send(vehicles);
     })
     .catch((err) => {
-      res.status(500).send({ message: 'something went wrong' });
+      res.status(500).send({ message: `something went wrong ${err}` });
     });
 };
 
@@ -39,7 +39,7 @@ exports.addVehicle = (req, res) => {
     .save()
     .then((data) => res.send(data))
     .catch((err) => {
-      res.status(500).send({ message: 'something went wrong' });
+      res.status(500).send({ message: `something went wrong ${err}` });
     });
 };
 
@@ -64,6 +64,28 @@ exports.updateVehicle = (req, res) => {
       res.send(vehicle);
     })
     .catch((err) => {
-      res.status(500).send({ message: 'something went wrong' });
+      res.status(500).send({ message: `something went wrong ${err}` });
+    });
+};
+
+exports.assignDriver = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({ message: 'please fill all details' });
+  }
+  Vehicles.findByIdAndUpdate(
+    req.params.id,
+    {
+      driver: req.body.driver,
+    },
+    { new: true },
+  )
+    .then((data) => {
+      if (!data) {
+        return res.status(400).send({ message: 'vehicle not found' });
+      }
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({ message: `something went wrong ${err}` });
     });
 };

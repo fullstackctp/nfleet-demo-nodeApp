@@ -14,11 +14,11 @@ const vehicleSchema = new Schema(
     highest_Speed: Number,
     last_mileage: Number,
     driver: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.String,
       ref: 'Driver',
     },
     device: {
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.String,
       ref: 'Device',
     },
     created_by: {
